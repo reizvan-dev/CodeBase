@@ -19,7 +19,7 @@ namespace CodeBase.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetAllProductsDto>>> GetAllProducts()
+        public async Task<ActionResult<List<GetAllProductsResponse>>> GetAllProducts()
         {
             return Ok(await _mediator.Send(new GetAllProductsQuery()));
         }

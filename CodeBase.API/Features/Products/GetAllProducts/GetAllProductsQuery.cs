@@ -2,7 +2,5 @@
 
 namespace CodeBase.API.Features.Products.GetAllProducts
 {
-	public class GetAllProductsQuery: IRequest<List<GetAllProductsDto>>
-	{
-	}
+	public record GetAllProductsQuery: IRequest<List<GetAllProductsResponse>>;
 }
