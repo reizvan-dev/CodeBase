@@ -1,10 +1,8 @@
-﻿using System;
+﻿using MediatR;
+
 namespace CodeBase.API.Features.Products.AddProduct
 {
-	public class AddProductCommand
-	{
-		public AddProductCommand()
-		{
-		}
-	}
+    public class AddProductCommand : AddProductRequest, IRequest<int>
+    {
+    }
 }

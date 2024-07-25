@@ -1,4 +1,6 @@
-﻿using CodeBase.API.Features.Products.GetAllProducts;
+﻿using System.Reflection.Metadata;
+using CodeBase.API.Features.Products.AddProduct;
+using CodeBase.API.Features.Products.GetAllProducts;
 using CodeBase.Domain;
 using CodeBase.Infrastructure.Repositories;
 using MediatR;
@@ -36,11 +38,11 @@ namespace CodeBase.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Product value)
+        public async Task<ActionResult> AddProduct([FromBody] AddProductCommand request)
         {
-            await _repository.CreateAsync(value);
+            var response = await _mediator.Send(request);
 
-            return Ok();
+            return CreatedAtAction(nameof(AddProduct), new { id = response });
         }
 
         [HttpPut]
