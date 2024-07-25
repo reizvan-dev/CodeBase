@@ -1,5 +1,7 @@
-﻿using CodeBase.Domain;
+﻿using CodeBase.API.Features.Products.GetAllProducts;
+using CodeBase.Domain;
 using CodeBase.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeBase.API.Controllers
@@ -8,18 +10,18 @@ namespace CodeBase.API.Controllers
     public class ProductsController : Controller
     {
         private readonly IGenericRepository<Product> _repository;
+        private readonly IMediator _mediator;
 
-        public ProductsController(IGenericRepository<Product> repository)
+        public ProductsController(IGenericRepository<Product> repository, IMediator mediator)
         {
             _repository = repository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<Product>>> Get()
+        public async Task<ActionResult<List<GetAllProductsDto>>> GetAllProducts()
         {
-            var products = await _repository.GetAsync();
-
-            return Ok(products);
+            return Ok(await _mediator.Send(new GetAllProductsQuery()));
         }
 
         [HttpGet("{id}")]
